@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "alatsi";
+  src: url("../src/assets/Fonts/Alatsi-Regular.ttf");
+}
+@font-face {
+  font-family: "abeezee";
+  src: url("../src/assets/Fonts/ABeeZee-Regular.ttf");
+}
+h1{
+  font-family: "alatsi";
+}
+*{
+  font-family: 'abeezee';
+}
+
+
+
