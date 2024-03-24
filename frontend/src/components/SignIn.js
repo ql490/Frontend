@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/SignIn.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignInImg from '../assets/Image/SignInImg.png';
@@ -13,15 +13,14 @@ export default function SignIn() {
       event.preventDefault();
   
       try {
-        // Fetch data from the API endpoint handling authentication
         const response = await fetch('https://gp-ooo8.onrender.com/users/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            
           },
           body: JSON.stringify({ username, password }),
         });
+        console.log(response);
   
         if (!response.ok) {
           throw new Error(`API request failed with status ${response.status}`);
@@ -29,13 +28,9 @@ export default function SignIn() {
   
         const data = await response.json();
   
-        if (data.success) {
-          // Login successful! Store relevant data in local storage
+        if (data.message === "Login successful")  {
           localStorage.setItem('accessToken', data.accessToken);
-          // Consider storing user ID instead of username for security
-          localStorage.setItem('userId', data.userId);
-  
-          // Redirect to a protected route or dashboard after successful login
+          localStorage.setItem('userId', data.user._id);
           window.location.href = '/dashboard';
         } else {
           setError('Invalid username or password');
@@ -45,7 +40,7 @@ export default function SignIn() {
         setError('An error occurred. Please try again later.');
       }
     };
-  console.log(error);
+  
 
     return (
         <div className='container-fluid signin-container '>
@@ -56,6 +51,7 @@ export default function SignIn() {
                         <img src={Logo} className='logoImg' alt='Logo' />
                         <h1>Ui Unicorn</h1>
                     </div>
+                    {error && <div className="error-message">{error}</div>}
                     <form onSubmit={handleSignIn}>
                         <div className='signin-content'>
                             <h1>Nice to see you again</h1>
@@ -84,9 +80,8 @@ export default function SignIn() {
                         </div>
                         <a href='/' className='forgot-password'>Forgot Password?</a>
                         <button
-                            type="button"
+                            type="submit" /* Changed from "button" to "submit" */
                             className="btn btn-lg btn-block signin-button"
-                            onClick={handleSignIn}
                         >
                             Sign in
                         </button>
