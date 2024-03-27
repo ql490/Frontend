@@ -2,13 +2,17 @@
 import '../src/assets/Icons/fontawesome/css/all.css'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SignIn from './components/SignIn';
+import SignUp from './components/pages/SignUp';
+
+
+
+
 
 function App() {
   return (
     <div className="App">
+      <SignUp/>
       
-      <SignIn/>
     </div>
   );
 }

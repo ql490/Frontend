@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import '../styles/SignIn.css';
+import '../SignIn.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SignInImg from '../assets/Image/SignInImg.png';
 import Logo from '../assets/Image/Unicorn_Logo.png';
+
 
 export default function SignIn() {
     const [username, setUsername] = useState('');
@@ -29,7 +30,7 @@ export default function SignIn() {
         const data = await response.json();
   
         if (data.message === "Login successful")  {
-          localStorage.setItem('accessToken', data.accessToken);
+         
           localStorage.setItem('userId', data.user._id);
           window.location.href = '/dashboard';
         } else {
@@ -66,6 +67,8 @@ export default function SignIn() {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                             />
+                            
+
                             <label htmlFor='password-input'>Password</label>
                             <input
                                 type="password"
@@ -78,14 +81,15 @@ export default function SignIn() {
                             />
 
                         </div>
-                        <a href='/' className='forgot-password'>Forgot Password?</a>
+                        <a href='/' className='forgot-password col-12 mt-10'>Forgot Password?</a>
                         <button
-                            type="submit" /* Changed from "button" to "submit" */
-                            className="btn btn-lg btn-block signin-button"
+                            type="submit" 
+                            className="btn btn-lg btn-block signin-button col-12"
                         >
                             Sign in
                         </button>
-                    </form>
+                         </form>
+                   
                     <div className='have-account-container'>
                         <p>Don't have an account?</p>
                         <a href='/'>Sign up now</a>

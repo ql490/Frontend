@@ -3,11 +3,11 @@
 @media (min-width:1200px){
     .signin-container {
     display: grid;
-    
+    grid-template-columns: 12fr 1fr;
 }
 .signinimg {
-    width: 900px;
-    height: 900px;
+    justify-self: center;
+    height: 46rem;
 }
 .logo-container {
     display: flex;
@@ -56,7 +56,7 @@ a{
     padding: 2px 0px;
 }
 .forgot-password{
-    margin-top: 15px;
+    margin-top: 150px;
 }
 .signin-button{
     margin-top: 36px;
