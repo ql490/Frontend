@@ -7,8 +7,10 @@ import '../../SignIn.css';
 export default function SignUp() {
     const [emailInputValue, setEmailInputValue] = useState('');
     const [passwordInputValue, setPasswordInputValue] = useState('');
+    const [confirmPasswordInputValue, setConfirmPasswordInputValue] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
 
     const validateEmail = (email) => {
         // Regular expression for email validation
@@ -50,7 +52,17 @@ export default function SignUp() {
             );
         }
     }, [passwordInputValue]);
-
+    useEffect(() => {
+        if (confirmPasswordInputValue.trim() === '') {
+            setConfirmPasswordError('');
+        } else {
+            setConfirmPasswordError(
+                confirmPasswordInputValue === passwordInputValue
+                    ? ''
+                    : 'Passwords do not match.'
+            );
+        }
+    }, [confirmPasswordInputValue, passwordInputValue]);
     return (
         <div className='container-fluid signin-container'>
             <div className='row'>
@@ -82,12 +94,25 @@ export default function SignUp() {
                             />
 
                             {passwordError && <div className="error">{passwordError}</div>}
+
+                            <SignFiled
+                                type="password"
+                                placeholder='Confirm Password'
+                                value={confirmPasswordInputValue}
+                                onChange={(e) => setConfirmPasswordInputValue(e.target.value)}
+                            />
+
+                            {confirmPasswordError && <div className="error">{confirmPasswordError}</div>}
                         </div>
                         <a href='/' className='forgot-password col-12 mt-10'>Forgot Password?</a>
                         <button
                             type="submit"
                             className="btn btn-lg btn-block signin-button col-12"
-                            disabled={!validateEmail(emailInputValue) || !validatePassword(passwordInputValue)}
+                            disabled={
+                                !validateEmail(emailInputValue) ||
+                                !validatePassword(passwordInputValue) ||
+                                passwordInputValue !== confirmPasswordInputValue
+                            }
                         >
                             Sign Up
                         </button>
